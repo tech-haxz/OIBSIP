@@ -26,7 +26,7 @@ function clearDisplay() {
 
 // function to remove last character
 function remove() {
-  if (display.value === "") {
+  if (display.value === "" || display.value === "Error") {
     display.value = "0";
     return;
   }
