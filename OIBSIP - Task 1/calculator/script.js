@@ -6,7 +6,6 @@ Description: A simple calculator application that performs basic arithmetic oper
 
 // Selecting the display element
 const display = document.getElementById("display");
-const operator = document.getElementsByClassName("operators");
 
 // Function to add value to display
 function appendToDisplay(value) {
