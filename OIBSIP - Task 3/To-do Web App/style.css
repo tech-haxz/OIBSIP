@@ -73,7 +73,6 @@ ul{
 }
 
 li{
-    padding: 10px;
     margin: 5px 0;
     /* max-width: 500px; */
     background-color:aliceblue;
@@ -82,6 +81,16 @@ li{
     justify-content: space-between;
     color: black;
     align-items: center;
+}
+
+.task{
+    flex-grow: 1;
+    padding: 10px;
+
+}
+
+.task h3, p{
+    margin: 5px;
 }
 
 #pendingTasksList{
