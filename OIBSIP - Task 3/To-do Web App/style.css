@@ -1,0 +1,127 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+:root{
+    --primary-color: #001f35;
+    --text-color: white;
+}
+
+body{
+    font-family: Arial, sans-serif;
+    background-color: var(--primary-color);
+    color: var(--text-color);
+}
+
+h1{
+    font-size: 2.5em;
+    text-align: center;
+    margin: 20px 0;
+    color: var(--text-color);
+}
+
+.input-container{
+    max-width: 800px;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+    flex-direction: column
+}
+
+.input-controls{
+    padding: 10px;
+    font-size: larger;
+    border-radius: 5px;
+}
+
+.btn{
+    padding: 10px 20px;
+    font-size: larger;
+    background-color: rgb(5, 157, 0);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.btn:hover{
+    opacity: 0.8;
+}
+
+.task-list-container{
+    width: 80%;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    gap: 10px;
+}
+
+.pending-tasks{
+    max-width: max-content;
+}
+
+.completed-tasks{
+    max-width: max-content;
+}
+
+ul{
+    list-style-type: none;
+    padding: 0;
+}
+
+li{
+    padding: 10px;
+    margin: 5px 0;
+    /* max-width: 500px; */
+    background-color:aliceblue;
+    border-radius: 5px;
+    display: flex;
+    justify-content: space-between;
+    color: black;
+    align-items: center;
+}
+
+#pendingTasksList{
+    background-color: var(--primary-color);
+    padding: 5px;
+    margin-top: 10px;
+    height: 500px;
+    overflow-y: auto;
+    scrollbar-width: 2px;
+    border-radius: 5px;
+}
+
+#completedTasksList{
+    background-color: var(--primary-color);
+    padding: 5px;
+    margin-top: 10px;
+    height: 500px;
+    overflow-y: auto;
+    scrollbar-width: 2px;
+    border-radius: 5px;
+}
+
+.complete-btn{
+    padding: 5px 10px;
+    background-color: rgb(1, 183, 1);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.delete-btn{
+    padding: 5px 10px;
+    background-color: rgb(255, 0, 0);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+::-webkit-scrollbar{
+    display: none;
+}
