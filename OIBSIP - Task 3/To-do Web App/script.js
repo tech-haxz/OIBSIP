@@ -9,6 +9,7 @@ const taskDescriptions = [];
 const taskCompTitles = [];
 const taskCompDescriptions = [];
 
+//function to remove pending tasks from local storage
 function removePendingTasks(elm) {
   const index = taskTitles.indexOf(elm);
   if (index > -1) {
@@ -19,6 +20,7 @@ function removePendingTasks(elm) {
   localStorage.setItem("taskDescriptions", taskDescriptions.join(","));
 }
 
+//function to remove completed tasks from local storage
 function removeCompletedTasks(elm) {
   const index = taskCompTitles.indexOf(elm);
   if (index > -1) {
@@ -29,6 +31,7 @@ function removeCompletedTasks(elm) {
   localStorage.setItem("taskCompDescriptions", taskCompDescriptions.join(","));
 }
 
+//Event listener for the add task button
 addButton.addEventListener("click", function () {
   const taskTitle = title.value.trim();
   const taskDescription = description.value.trim();
