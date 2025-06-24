@@ -120,3 +120,143 @@ addButton.addEventListener("click", function () {
   localStorage.setItem("taskTitles", taskTitles.join(","));
   localStorage.setItem("taskDescriptions", taskDescriptions.join(","));
 });
+
+// Load tasks from local storage on page load
+window.onload = function () {
+  const pendingTasksList = document.getElementById("pendingTasksList");
+  const completedTasksList = document.getElementById("completedTasksList");
+
+  const storedTitles = localStorage.getItem("taskTitles");
+  const storedDescs = localStorage.getItem("taskDescriptions");
+  const storedCompTitles = localStorage.getItem("taskCompTitles");
+  const storedCompDescs = localStorage.getItem("taskCompDescriptions");
+
+  if (storedTitles && storedDescs) {
+    const titles = storedTitles.split(",");
+    const descriptions = storedDescs.split(",");
+
+    titles.forEach((title, i) => {
+      taskTitles.push(title);
+      taskDescriptions.push(descriptions[i]);
+
+      const li = document.createElement("li");
+      li.innerHTML = `<div class="task">
+                        <h3>${title}</h3>
+                        <p>${descriptions[i]}</p>
+                        <button class="complete-btn">Complete</button>
+                        <button class="delete-btn">Delete</button>
+                      </div>`;
+      pendingTasksList.appendChild(li);
+
+      const deleteButton = li.querySelector(".delete-btn");
+      deleteButton.addEventListener("click", function () {
+        pendingTasksList.removeChild(li);
+        removePendingTasks(title);
+      });
+
+      const completeButton = li.querySelector(".complete-btn");
+      completeButton.addEventListener("click", function () {
+        li.classList.toggle("completed");
+        if (li.classList.contains("completed")) {
+          li.querySelector("h3").style.textDecoration = "line-through";
+          li.querySelector("p").style.textDecoration = "line-through";
+          completeButton.textContent = "Undo";
+          pendingTasksList.removeChild(li);
+          completedTasksList.appendChild(li);
+          taskCompTitles.push(title);
+          taskCompDescriptions.push(descriptions[i]);
+          localStorage.setItem("taskCompTitles", taskCompTitles.join(","));
+          localStorage.setItem(
+            "taskCompDescriptions",
+            taskCompDescriptions.join(",")
+          );
+          removePendingTasks(title);
+        } else {
+          li.querySelector("h3").style.textDecoration = "none";
+          li.querySelector("p").style.textDecoration = "none";
+          completeButton.textContent = "Complete";
+          completedTasksList.removeChild(li);
+          pendingTasksList.appendChild(li);
+          taskTitles.push(title);
+          taskDescriptions.push(descriptions[i]);
+          localStorage.setItem("taskTitles", taskTitles.join(","));
+          localStorage.setItem("taskDescriptions", taskDescriptions.join(","));
+          removeCompletedTasks(title);
+        }
+      });
+    });
+  }
+
+  if (storedCompTitles && storedCompDescs) {
+    const titles = storedCompTitles.split(",");
+    const descriptions = storedCompDescs.split(",");
+
+    titles.forEach((title, i) => {
+      taskCompTitles.push(title);
+      taskCompDescriptions.push(descriptions[i]);
+
+      const li = document.createElement("li");
+      li.classList.add("completed");
+      li.innerHTML = `<div class="task">
+                        <h3 style="text-decoration:line-through">${title}</h3>
+                        <p style="text-decoration:line-through">${descriptions[i]}</p>
+                        <button class="complete-btn">Undo</button>
+                        <button class="delete-btn">Delete</button>
+                      </div>`;
+      completedTasksList.appendChild(li);
+
+      const deleteButton = li.querySelector(".delete-btn");
+      deleteButton.addEventListener("click", function () {
+        completedTasksList.removeChild(li);
+        removeCompletedTasks(title);
+      });
+
+      const completeButton = li.querySelector(".complete-btn");
+      completeButton.addEventListener("click", function () {
+
+        const completeButton = li.querySelector(".complete-btn");
+        completeButton.addEventListener("click", function () {
+          if (li.classList.contains("completed")) {
+            // Undo complete
+            li.classList.remove("completed");
+            li.querySelector("h3").style.textDecoration = "none";
+            li.querySelector("p").style.textDecoration = "none";
+            completeButton.textContent = "Complete";
+
+            completedTasksList.removeChild(li);
+            pendingTasksList.appendChild(li);
+
+            taskTitles.push(title);
+            taskDescriptions.push(descriptions[i]);
+            localStorage.setItem("taskTitles", taskTitles.join(","));
+            localStorage.setItem(
+              "taskDescriptions",
+              taskDescriptions.join(",")
+            );
+
+            removeCompletedTasks(title);
+          } else {
+            // Mark as complete
+            li.classList.add("completed");
+            li.querySelector("h3").style.textDecoration = "line-through";
+            li.querySelector("p").style.textDecoration = "line-through";
+            completeButton.textContent = "Undo";
+
+            pendingTasksList.removeChild(li);
+            completedTasksList.appendChild(li);
+
+            taskCompTitles.push(title);
+            taskCompDescriptions.push(descriptions[i]);
+            localStorage.setItem("taskCompTitles", taskCompTitles.join(","));
+            localStorage.setItem(
+              "taskCompDescriptions",
+              taskCompDescriptions.join(",")
+            );
+
+            removePendingTasks(title);
+          }
+        });
+      });
+    });
+  }
+};
