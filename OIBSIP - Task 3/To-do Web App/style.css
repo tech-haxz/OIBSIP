@@ -42,6 +42,7 @@ h1{
     background-color: rgb(5, 157, 0);
     color: white;
     border: none;
+    font-weight: bolder;
     border-radius: 5px;
     cursor: pointer;
 }
@@ -133,4 +134,32 @@ li{
 
 ::-webkit-scrollbar{
     display: none;
+}
+
+@media screen and (max-width: 600px) {
+
+    .input-container{
+        flex-direction: column;
+        align-items: center;
+        padding: 20px;
+    }
+    .input-controls{
+        width: 100%;
+        margin-bottom: 10px;
+    }
+    .btn{
+        width: 100%;
+    }
+    .task-list-container{
+        flex-direction: column;
+        align-items: center;
+    }
+    .pending-tasks, .completed-tasks{
+        width: 100%;
+    }
+
+    ::-webkit-scrollbar{
+        width: 8px;
+    }
+    
 }
